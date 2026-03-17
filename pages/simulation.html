@@ -49,25 +49,44 @@ let ctx = canvas.getContext("2d");
 let gas = 100;
 let cond = 50;
 
+let historyGas = [];
+let historyCond = [];
+
 function draw() {
     ctx.clearRect(0,0,600,300);
 
-    // gaz (bleu)
-    ctx.fillStyle = "blue";
-    ctx.fillRect(50, 300 - gas, 50, gas);
-
-    // condensé (vert)
-    ctx.fillStyle = "green";
-    ctx.fillRect(150, 300 - cond, 50, cond);
-
-    // évolution simple
+    // évolution
     let transfer = gas * 0.02;
     gas -= transfer;
     cond += transfer;
 
-    // dilution (expansion)
     gas *= 0.99;
     cond *= 0.99;
+
+    historyGas.push(gas);
+    historyCond.push(cond);
+
+    if (historyGas.length > 100) {
+        historyGas.shift();
+        historyCond.shift();
+    }
+
+    // dessin courbes
+    for (let i = 1; i < historyGas.length; i++) {
+        // gaz
+        ctx.strokeStyle = "blue";
+        ctx.beginPath();
+        ctx.moveTo(i*5, 300 - historyGas[i-1]);
+        ctx.lineTo(i*5, 300 - historyGas[i]);
+        ctx.stroke();
+
+        // condensé
+        ctx.strokeStyle = "green";
+        ctx.beginPath();
+        ctx.moveTo(i*5, 300 - historyCond[i-1]);
+        ctx.lineTo(i*5, 300 - historyCond[i]);
+        ctx.stroke();
+    }
 }
 
 setInterval(draw, 100);
