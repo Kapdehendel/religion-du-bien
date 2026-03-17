@@ -40,6 +40,9 @@ On observe :
 Cela permet de visualiser l’équilibre entre condensation et expansion.
 </p>
 
+<label>Vitesse :</label>
+<input type="range" id="speed" min="10" max="200" value="100">
+
 <canvas id="graph" width="600" height="300" style="background:#000;"></canvas>
 
 <script>
@@ -89,7 +92,14 @@ function draw() {
     }
 }
 
-setInterval(draw, 100);
+let speedControl = document.getElementById("speed");
+
+function loop() {
+    draw();
+    setTimeout(loop, speedControl.value);
+}
+
+loop();
 </script>
 
 </body>
