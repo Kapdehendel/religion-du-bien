@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #020617, #0f172a);
+    color: #e2e8f0;
+    margin: 40px;
+}
+
+h1 {
+    color: #38bdf8;
+}
+
+h2 {
+    color: #22c55e;
+}
+
+a {
+    color: #22c55e;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
