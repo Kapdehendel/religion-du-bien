@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Simulation TEC</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<nav>
+<a href="../index.html">Accueil</a> |
+<a href="pourquoi.html">Pourquoi</a> |
+<a href="pivot.html">Pivot</a> |
+<a href="createur.html">Créateur</a> |
+<a href="tec.html">TEC</a> |
+<a href="cycle.html">Cycle</a> |
+<a href="tout.html">Tout</a> |
+<a href="simulation.html">Simulation</a>
+</nav>
+
+<h1>Simulation simplifiée TEC</h1>
+
+<p>
+Cette simulation montre l’évolution de la matière condensée et du gaz.
+</p>
+
+<canvas id="graph" width="600" height="300" style="background:#000;"></canvas>
+
+<script>
+let canvas = document.getElementById("graph");
+let ctx = canvas.getContext("2d");
+
+let gas = 100;
+let cond = 50;
+
+function draw() {
+    ctx.clearRect(0,0,600,300);
+
+    // gaz (bleu)
+    ctx.fillStyle = "blue";
+    ctx.fillRect(50, 300 - gas, 50, gas);
+
+    // condensé (vert)
+    ctx.fillStyle = "green";
+    ctx.fillRect(150, 300 - cond, 50, cond);
+
+    // évolution simple
+    let transfer = gas * 0.02;
+    gas -= transfer;
+    cond += transfer;
+
+    // dilution (expansion)
+    gas *= 0.99;
+    cond *= 0.99;
+}
+
+setInterval(draw, 100);
+</script>
+
+</body>
+</html>
