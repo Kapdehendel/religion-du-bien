@@ -43,9 +43,14 @@ Cela permet de visualiser l’équilibre entre condensation et expansion.
 <label>Vitesse :</label>
 <input type="range" id="speed" min="10" max="200" value="100">
 
+<br><br>
+<label>Taux de condensation :</label>
+<input type="range" id="rate" min="0" max="10" value="2">
+
 <canvas id="graph" width="600" height="300" style="background:#000;"></canvas>
 
 <script>
+let rateControl = document.getElementById("rate");
 let canvas = document.getElementById("graph");
 let ctx = canvas.getContext("2d");
 
@@ -59,7 +64,8 @@ function draw() {
     ctx.clearRect(0,0,600,300);
 
     // évolution
-    let transfer = gas * 0.02;
+    let rate = rateControl.value / 100;
+let transfer = gas * rate;
     gas -= transfer;
     cond += transfer;
 
