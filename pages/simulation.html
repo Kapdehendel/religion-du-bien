@@ -76,12 +76,19 @@ function draw() {
 
     // évolution
     let rate = rateControl.value / 100;
-let transfer = gas * rate;
-    gas -= transfer;
-    cond += transfer;
 
-    gas *= 0.99;
-    cond *= 0.99;
+// condensation
+let toCond = gas * rate;
+
+// recyclage (retour)
+let toGas = cond * 0.01;
+
+gas = gas - toCond + toGas;
+cond = cond + toCond - toGas;
+
+// expansion (dilution)
+gas *= 0.995;
+cond *= 0.995;
 
     historyGas.push(gas);
     historyCond.push(cond);
