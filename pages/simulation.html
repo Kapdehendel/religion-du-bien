@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Simulation TEC</title>
+<title>Modèle TEC</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 
@@ -15,119 +15,42 @@
 <a href="createur.html">Créateur</a> |
 <a href="tec.html">TEC</a> |
 <a href="cycle.html">Cycle</a> |
-<a href="tout.html">Tout</a> |
-<a href="simulation.html">Simulation</a>
+<a href="tout.html">Tout</a>
 </nav>
 
-<h1>Simulation simplifiée TEC</h1>
+<h1>Modèle simplifié TEC</h1>
+
+<h2>Principe</h2>
 
 <p>
-Cette simulation illustre un modèle simplifié de la théorie TEC.
+L’univers évolue selon trois dynamiques principales :
+</p>
+
+<ul>
+<li>Condensation de la matière</li>
+<li>Recyclage de la matière</li>
+<li>Expansion de l’espace</li>
+</ul>
+
+<h2>Schéma</h2>
+
+<p>
+Gaz → Condensation → Matière condensée  
+Matière condensée → Recyclage → Gaz  
+Expansion → dilution globale
+</p>
+
+<h2>Interprétation</h2>
+
+<p>
+La réalité n’est pas un simple mouvement dans un sens,
+mais un équilibre dynamique entre formation, transformation et expansion.
 </p>
 
 <p>
-La barre bleue représente le gaz diffus.
-La barre verte représente la matière condensée.
+Ce modèle permet de comprendre l’évolution des structures
+sans supposer une création à partir de rien.
 </p>
-
-<p>
-On observe :
-- la transformation du gaz en matière condensée
-- la dilution globale due à l’expansion
-</p>
-
-<p>
-Cela permet de visualiser l’équilibre entre condensation et expansion.
-</p>
-
-<label>Vitesse :</label>
-<input type="range" id="speed" min="10" max="200" value="100">
-
-<br><br>
-<label>Taux de condensation :</label>
-<input type="range" id="rate" min="0" max="10" value="2">
-
-<p id="values"></p>
-
-<br><br>
-<button onclick="resetSimulation()">Reset</button>
-
-<canvas id="graph" width="600" height="300" style="background:#000;"></canvas>
-
-<script>
-function resetSimulation() {
-    gas = 100;
-    cond = 50;
-    historyGas = [];
-    historyCond = [];
-}
-let rateControl = document.getElementById("rate");
-let canvas = document.getElementById("graph");
-let ctx = canvas.getContext("2d");
-
-let gas = 100;
-let cond = 50;
-
-let historyGas = [];
-let historyCond = [];
-
-function draw() {
-    ctx.clearRect(0,0,600,300);
-
-    // évolution
-    let rate = rateControl.value / 100;
-
-// condensation
-let toCond = gas * rate;
-
-// recyclage (retour)
-let toGas = cond * 0.01;
-
-gas = gas - toCond + toGas;
-cond = cond + toCond - toGas;
-
-// expansion (dilution)
-gas *= 0.995;
-cond *= 0.995;
-
-    historyGas.push(gas);
-    historyCond.push(cond);
-
-    if (historyGas.length > 100) {
-        historyGas.shift();
-        historyCond.shift();
-document.getElementById("values").innerHTML =
-    "Gaz : " + gas.toFixed(2) +
-    " | Condensé : " + cond.toFixed(2);
-    }
-
-    // dessin courbes
-    for (let i = 1; i < historyGas.length; i++) {
-        // gaz
-        ctx.strokeStyle = "blue";
-        ctx.beginPath();
-        ctx.moveTo(i*5, 300 - historyGas[i-1]);
-        ctx.lineTo(i*5, 300 - historyGas[i]);
-        ctx.stroke();
-
-        // condensé
-        ctx.strokeStyle = "green";
-        ctx.beginPath();
-        ctx.moveTo(i*5, 300 - historyCond[i-1]);
-        ctx.lineTo(i*5, 300 - historyCond[i]);
-        ctx.stroke();
-    }
-}
-
-let speedControl = document.getElementById("speed");
-
-function loop() {
-    draw();
-    setTimeout(loop, speedControl.value);
-}
-
-loop();
-</script>
 
 </body>
 </html>
