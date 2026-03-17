@@ -47,6 +47,8 @@ Cela permet de visualiser l’équilibre entre condensation et expansion.
 <label>Taux de condensation :</label>
 <input type="range" id="rate" min="0" max="10" value="2">
 
+<p id="values"></p>
+
 <canvas id="graph" width="600" height="300" style="background:#000;"></canvas>
 
 <script>
@@ -78,6 +80,9 @@ let transfer = gas * rate;
     if (historyGas.length > 100) {
         historyGas.shift();
         historyCond.shift();
+document.getElementById("values").innerHTML =
+    "Gaz : " + gas.toFixed(2) +
+    " | Condensé : " + cond.toFixed(2);
     }
 
     // dessin courbes
