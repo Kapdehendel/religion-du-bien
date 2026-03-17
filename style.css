@@ -44,3 +44,19 @@ nav a {
     margin: 0 10px;
     font-weight: bold;
 }
+
+h2 {
+    margin-top: 40px;
+    border-bottom: 1px solid #38bdf8;
+    padding-bottom: 5px;
+}
+
+ul, ol {
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+nav {
+    margin-bottom: 30px;
+}
