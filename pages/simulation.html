@@ -49,9 +49,18 @@ Cela permet de visualiser l’équilibre entre condensation et expansion.
 
 <p id="values"></p>
 
+<br><br>
+<button onclick="resetSimulation()">Reset</button>
+
 <canvas id="graph" width="600" height="300" style="background:#000;"></canvas>
 
 <script>
+function resetSimulation() {
+    gas = 100;
+    cond = 50;
+    historyGas = [];
+    historyCond = [];
+}
 let rateControl = document.getElementById("rate");
 let canvas = document.getElementById("graph");
 let ctx = canvas.getContext("2d");
